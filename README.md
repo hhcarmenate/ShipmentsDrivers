@@ -37,7 +37,7 @@ Steps
   
   ![image](https://user-images.githubusercontent.com/16532763/117708040-53de6e00-b19d-11eb-86e6-dfcb3ba4b826.png)
 
-- Click in "Make Assignment" button to make association base on the Suitable Score.
+- Click on "Make Assignment" button to make association base on the Suitable Score.
   
   ![image](https://user-images.githubusercontent.com/16532763/117708424-c94a3e80-b19d-11eb-90e7-4329611169d8.png)
 
@@ -57,7 +57,7 @@ Steps
   app/Http/Controllers/Shipments/ShipmentsByDatesApiController.php  
   app/Http/Controllers/Shipments/ShipmentsByDatesController.php  
   
-- Api response class to handle SPA respond
+- Api response class to handle SPA respond.
 
   app/Http/Support/Response/ApiResponse.php  
   
