@@ -6,10 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\MakeAssignmentRequest;
 use App\Http\Resources\Shipments\AssignShipmentsResource;
 use App\Http\Support\Shipments\ShipmentDestinationAssign;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
 

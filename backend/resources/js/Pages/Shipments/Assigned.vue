@@ -9,7 +9,6 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="h-screen bg-gray-400 overflow-hidden shadow-xl sm:rounded-lg flex justify-center">
                     <assignments-table :assignments="assignments.data" v-if="assignments.data.length"/>
-
                 </div>
             </div>
         </div>
