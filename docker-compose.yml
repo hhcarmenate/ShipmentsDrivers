@@ -1,0 +1,75 @@
+version: "3"
+services:
+  #Nginx Service
+  webserver:
+    image: nginx:alpine
+    container_name: platform_science_nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "90:80"
+      - "442:442"
+    volumes:
+      - ./backend:/var/www/
+      - .docker/nginx/conf.d/:/etc/nginx/conf.d/
+    depends_on:
+      - app
+
+  #PHP Service
+  app:
+    build: .docker/php
+    container_name: platform_science_app
+    volumes:
+      - ./backend:/var/www/
+      - .docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    restart: unless-stopped
+    tty: true
+    environment:
+      - maildev_host=maildev_container
+        #SERVICE_NAME: app
+        #SERVICE_TAGS: dev
+    working_dir: /var/www
+    depends_on:
+      - maildev
+      - mysql
+
+  #MySQL Service
+  mysql:
+    image: mysql:8
+    container_name: platform_science_mysql
+    volumes:
+      - .docker/data/db:/var/lib/mysql
+    command:
+      - "--default-authentication-plugin=mysql_native_password"
+      - "--lower_case_table_names=1"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: platform_science
+      MYSQL_USER: root
+      MYSQL_PASSWORD: secret
+
+  #PHP-MyAdmin MYSQL
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: platform_science_phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - 9090:80
+    links:
+      - mysql
+
+  #Mail_Host
+  maildev:
+    image: djfarrelly/maildev
+    container_name: platform_science_maildev
+    ports:
+      - 9002:80
+
+  #Redis
+  redis:
+    image: redis:latest
+    container_name: platform_science_redis
+    ports:
+      - "127.0.0.1:7379:7379"
