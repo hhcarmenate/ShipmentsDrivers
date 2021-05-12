@@ -10,13 +10,14 @@ class DriversData
 
     private string $last_name;
 
-    private string $completed_name;
+    public string $completed_name;
 
     private float $suitability_score;
 
     private int $vowels;
 
     private int $consonants;
+
 
 
     /**
@@ -118,6 +119,16 @@ class DriversData
     public function getConsonants()
     {
         return $this->consonants;
+    }
+
+    /**
+     * Magic get
+     * @param $name
+     * @return mixed
+     */
+    public function __get($name)
+    {
+        return $this->$name;
     }
 
 }

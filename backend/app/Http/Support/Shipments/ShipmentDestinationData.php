@@ -60,18 +60,35 @@ class ShipmentDestinationData
     private function calculateSuitableScore()
     {
         $driver_assigned = null;
-        $max_suitable_score = 0;
-        $key_selected = 0;
-        $this->drivers->each(function($driver,$index) use(&$max_suitable_score, &$driver_assigned, &$key_selected){
+        $this->drivers->each(function($driver){
             new CalculateSuitableScore($this->street_name, $driver);
-            $suitable_score = $driver->getSuitabilityScore();
-            if($max_suitable_score < $suitable_score) {
-                $driver_assigned = $driver;
-                $max_suitable_score = $suitable_score;
-                $key_selected = $index;
-            }
         });
-        $this->driver_assigned = $driver_assigned;
-        $this->drivers->forget($key_selected);
+    }
+
+    /**
+     * Set Actual assigned driver
+     * @param DriversData $driversData
+     */
+    public function setDriverAssigned(DriversData $driversData)
+    {
+        $this->driver_assigned = $driversData;
+    }
+
+    /**
+     * Get the assigned driver
+     * @return DriversData|null
+     */
+    public function getDriverAssigned()
+    {
+        return $this->driver_assigned;
+    }
+
+    /**
+     * Get the drivers collection with each suitable score
+     * @return Collection
+     */
+    public function getDrivers()
+    {
+        return $this->drivers;
     }
 }

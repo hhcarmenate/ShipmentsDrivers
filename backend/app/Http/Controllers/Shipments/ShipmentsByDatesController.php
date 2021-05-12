@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Shipments;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MakeAssignmentRequest;
-use App\Http\Resources\Shipments\AssignShipmentsResource;
 use App\Http\Support\Shipments\ShipmentDestinationAssign;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -28,7 +27,7 @@ class ShipmentsByDatesController extends Controller
     {
         return Inertia::render('Shipments/Assigned',
             [
-                'assignments' => AssignShipmentsResource::collection((new ShipmentDestinationAssign($request))->getShipmentsData())
+                'assignments' => (new ShipmentDestinationAssign($request))->getShipmentsData()
             ]);
     }
 
