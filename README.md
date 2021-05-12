@@ -4,6 +4,7 @@ Platform Science Exercise
 Steps
 - Download the master branch
 - Open the terminal(cmd) and go to Project Path
+- Run composer install
 - Run "docker-compose up --build" (You must have docker installed on your computer)
 - Login into docker container named platform_science_app and run "php artisan migrate"
 - Go to localhost:90 
